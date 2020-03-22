@@ -4,9 +4,8 @@ namespace BatalhaNaval
 {
     public class Game
     {
-        public static void Interface() {
+        public static void Interface(Player player) {
             Random rnd = new Random();
-            Player player = new Player();
             Settings.Menu();
             Settings.InicializarGrelha();
             int coluna;
@@ -57,17 +56,21 @@ namespace BatalhaNaval
                 Console.WriteLine("Insira a coordenada linha,coluna do tiro (exemplo: 1,1)");
                 Console.SetCursorPosition(1, 17);
                 Console.Write("> ");
-                
+
                 /* Coords[0] = linha
                  * Coords [1] = coluna
                  * String split é para dividir a linha e a coluna com uma virgula
-                 */ 
-                var coords = Console.ReadLine().Trim().Split(',');
-                
-                if (coords[0] == "d")
+                 */
+                var coords = new string[2];
+
+                do
                 {
-                    Environment.Exit(0);
-                }
+                    coords = Console.ReadLine().Trim().Split(',');
+
+                    if (coords[0] == "d")
+                        Environment.Exit(0);
+
+                } while (coords.Length < 2);
                 
                 if (Int32.TryParse(coords[0], out linha))
                 {
@@ -102,9 +105,8 @@ namespace BatalhaNaval
                                     Console.ForegroundColor = ConsoleColor.Red;
                                     Console.WriteLine("Falhou o alvo: acertou na água");
                                     Console.ForegroundColor = ConsoleColor.White;
-                                    Settings.grelha[coluna, linha] = 1;
+                                    Settings.grelha[coluna - 1, linha - 1] = 1;
                                     Console.ReadKey();
-
                                 }
                             }
                             else

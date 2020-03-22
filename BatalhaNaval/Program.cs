@@ -14,7 +14,7 @@ namespace BatalhaNaval
             Console.Write("Jogo(Simples ou ...): ");
             string jogo = Console.ReadLine();
             if (jogo == "Simples")
-                Game.Interface();
+                Game.Interface(player);
             else
                 Console.WriteLine("Desenvolvimento");
         }
